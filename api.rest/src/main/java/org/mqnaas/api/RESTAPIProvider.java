@@ -79,6 +79,9 @@ public class RESTAPIProvider implements IRESTAPIProvider {
 
 		Server server = factoryBean.create();
 
+		// 6. Add "HATEAOS" interceptor
+		server.getEndpoint().getOutInterceptors().add(new SampleInterceptor(interfaceToBePublished, capability));
+
 		servers.put(new ImmutablePair<ICapability, Class<? extends ICapability>>(capability, interfaceToBePublished), server);
 
 		log.debug("Published {} at {}", interfaceToBePublished, factoryBean.getAddress());
